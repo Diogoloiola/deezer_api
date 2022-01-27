@@ -1,7 +1,7 @@
 module Deezer
   # Model de requisição para nossos objetos
   class Resource
-    attr_reader :client, :klass
+    attr_accessor :client, :klass
 
     def initialize(client, klass)
       @client = client
@@ -22,15 +22,33 @@ module Deezer
     end
 
     def response_sucess(response)
-      objects = []
-      
-      response = response.body[:tracks].nil? ? response.body[:data] : response.body[:tracks][:data]
+      if response.body[:type] == 'playlist'
+        parse_response_playlist(response.body)
+      else
+        parse_normal_response(response.body)
+      end
+    end
 
-      response.each do |track|
-        objects.push(klass.new(track))
+    def parse_response_playlist(response)
+      klass.new(response)
+    end
+
+    def parse_normal_response(response)
+      objects = []
+
+      select_correct_class
+
+      response = response[:tracks].nil? ? response[:data] : response[:tracks][:data]
+
+      response.each do |item|
+        objects.push(klass.new(item))
       end
 
       objects
+    end
+
+    def select_correct_class
+      self.klass = Deezer::Track if klass == Deezer::Playlist
     end
   end
 end
