@@ -25,6 +25,10 @@ module Deezer
       Deezer::Api::Playlist.new(self, Deezer::Playlist)
     end
 
+    def user
+      Deezer::Api::User.new(self, Deezer::User)
+    end
+
     def connection
       @connection ||= Faraday.new(BASE_URL) do |con|
         con.request :json

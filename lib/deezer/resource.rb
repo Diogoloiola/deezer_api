@@ -22,14 +22,21 @@ module Deezer
     end
 
     def response_sucess(response)
-      if response.body[:type] == 'playlist'
+      case response.body[:type]
+      when 'playlist'
         parse_response_playlist(response.body)
+      when 'user'
+        parse_response_user(response.body)
       else
         parse_normal_response(response.body)
       end
     end
 
     def parse_response_playlist(response)
+      klass.new(response)
+    end
+
+    def parse_response_user(response)
       klass.new(response)
     end
 

@@ -6,4 +6,6 @@ module Deezer
   autoload :Genre, 'deezer/models/genre'
   autoload :Playlist, 'deezer/models/playlist'
   autoload :Episode, 'deezer/models/episode'
+  autoload :User, 'deezer/models/user'
+  autoload :Album, 'deezer/models/album'
 end
