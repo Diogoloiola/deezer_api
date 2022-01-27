@@ -36,9 +36,9 @@ module Deezer
     def parse_normal_response(response)
       objects = []
 
-      select_correct_class
-
       response = response[:tracks].nil? ? response[:data] : response[:tracks][:data]
+
+      select_correct_class(response[0][:type])
 
       response.each do |item|
         objects.push(klass.new(item))
@@ -47,8 +47,10 @@ module Deezer
       objects
     end
 
-    def select_correct_class
+    def select_correct_class(option = '')
       self.klass = Deezer::Track if klass == Deezer::Playlist
+
+      self.klass = Deezer::Episode if option == 'episode'
     end
   end
 end

@@ -5,4 +5,5 @@ module Deezer
   autoload :Podcast, 'deezer/models/podcast'
   autoload :Genre, 'deezer/models/genre'
   autoload :Playlist, 'deezer/models/playlist'
+  autoload :Episode, 'deezer/models/episode'
 end
