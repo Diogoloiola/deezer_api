@@ -17,6 +17,10 @@ module Deezer
       Deezer::Api::Podcast.new(self, Deezer::Podcast)
     end
 
+    def genre
+      Deezer::Api::Genre.new(self, Deezer::Genre)
+    end
+
     def connection
       @connection ||= Faraday.new(BASE_URL) do |con|
         con.request :json

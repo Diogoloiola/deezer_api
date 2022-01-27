@@ -23,6 +23,7 @@ module Deezer
 
     def response_sucess(response)
       objects = []
+      
       response = response.body[:tracks].nil? ? response.body[:data] : response.body[:tracks][:data]
 
       response.each do |track|
