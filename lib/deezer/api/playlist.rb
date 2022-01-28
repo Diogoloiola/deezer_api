@@ -6,6 +6,7 @@ module Deezer
       end
 
       def tracks(id, index = 0, limit = 100)
+        self.klass = Deezer::Track
         get_request("playlist/#{id}/tracks?index=#{index}&limit=#{limit}")
       end
     end

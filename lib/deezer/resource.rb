@@ -55,9 +55,6 @@ module Deezer
     end
 
     def select_correct_class(option = '')
-      # TODO: refatorar isso
-      # self.klass = Deezer::Track if klass == Deezer::Playlist
-
       self.klass = Deezer::Episode if option == 'episode'
     end
   end
